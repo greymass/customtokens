@@ -10,10 +10,16 @@ Custom Token tracking smart contract for EOS
 `cleos set contract customtokens customtokens -p customtokens@active`
 
 
-# Add to the table
+# Usage
+
+### Add to the table
 
 `cleos push action customtokens set '[1, "solveforanyx", "eosio.token", "0.0000 EOS"]' -p solveforanyx@active`
 
-# Remove from the table
+### Remove from the table
 
 `cleos push action customtokens del '[1]' -p solveforanyx@active`
+
+### View the table
+
+`cleos get table customtokens customtokens tokens`

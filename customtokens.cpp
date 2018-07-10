@@ -24,9 +24,11 @@ class customtokens_contract : public eosio::contract {
     // Look up the balance in the owner account of the specified token.
     // There's probably a better way to check if a token is valid or not,
     // but this is a quick check to ensure that the token is live.
-    accounts accountfind(customtoken, owner);
-    const auto& owneracc = accountfind.get(customasset.symbol.name());
-    eosio_assert(owneracc.balance.amount > 0, "a bal must exist");
+    if (owner != _self) {  // Let the contract owner skip this validation.
+      accounts accountfind(customtoken, owner);
+      const auto& owneracc = accountfind.get(customasset.symbol.name());
+      eosio_assert(owneracc.balance.amount > 0, "a bal must exist");
+    }
 
     // Find if we need to replace by identifier.
     auto target_itr = tokens.find(uuid);
